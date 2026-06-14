@@ -1,0 +1,41 @@
+{% extends 'master/base.html' %}
+
+{% block body %}
+  <h1>List of All Tasks Available</h1>
+  <form action="" method="GET">
+    <select name="status" class="form-select" aria-label="Default select example">
+      <option selected class="btn btn primary">See Task by Status</option>
+      <option value="Pending" 
+      {% if status == 'Pending' %}
+        selected
+      {% endif %}
+        >Pending</option>
+      <option value="In_Progress" 
+      {% if status == 'In_Progress' %}
+        selected
+      {% endif %}
+        >In Progress</option>
+      <option value="Completed" 
+      {% if status == 'Completed' %}
+        selected
+      {% endif %}
+        >Completed</option>
+    </select>
+    <button type="submit" class="btn btn-primary">Status</button>
+    <a href="{% url 'home_page' %}" class="btn btn-primary">Clear</a>
+  </form>
+ <div class="container">
+   <div class="row">
+   {% for d in data %}
+    <div class="card col-4 m-3" style="width: 18rem;">
+      <img src="/{{ d.task_image }}" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title">{{ d.title }}</h5>
+        <p class="card-text">{{ d.description }}</p>
+        <a href="{% url 'view_task' d.id %}" class="btn btn-primary">See This Task</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+ </div>
+{% endblock %}

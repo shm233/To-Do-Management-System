@@ -1,0 +1,53 @@
+{% extends 'master/base.html' %}
+
+{% block body %}
+  <h1>Task List</h1>
+  <form action="" method="GET">
+    <div class="mb-3">
+      <label for="title" class="fs-1 fw-bold" class="form-label">Search Box</label>
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <input type="text" name="search" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Search by title, priority or status" />
+      <button type="submit" class="btn btn-primary">
+        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>Search...</button>
+      <a href="{% url 'task_list' %}" class="btn btn-danger">Clear</a>
+    </div>
+  </form>
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th>Sl</th>
+        <th>Task Image</th>
+        <th>Title</th>
+        <th>Priority</th>
+        <th>Status</th>
+        <th>Due Date</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for d in data %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>
+            {% if d.task_image %}
+              <img src="/{{ d.task_image }}" alt="" width="80px" height="80px" />
+            {% else %}
+              <p>Image Loading Failed</p>
+            {% endif %}
+          </td>
+          <td>{{ d.title }}</td>
+          <td>{{ d.priority }}</td>
+          <td>{{ d.status }}</td>
+          <td>{{ d.due_date }}</td>
+          <td>
+            <a href="{% url 'view_task' d.id %}" class="btn btn-primary">View</a>
+            <a href="{% url 'edit_task' d.id %}" class="btn btn-warning">Edit</a>
+            <a href="{% url 'delete_task' d.id %}" class="btn btn-danger">Delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

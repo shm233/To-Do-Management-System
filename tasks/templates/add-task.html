@@ -1,0 +1,41 @@
+{% extends 'master/base.html' %}
+
+{% block body %}
+  <h1>Provide Information of the Task</h1>
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" name="title" class="form-control" id="title" placeholder="Name of the task" />
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea name="description" class="form-control" id="description" rows="3"></textarea>
+    </div>
+    <div class="mb-3">
+      <select name="priority" class="form-select" aria-label="Default select example">
+        <option selected>Open this select menu</option>
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <select name="status" class="form-select" aria-label="Default select example">
+        <option selected>Open this select menu</option>
+        <option value="Pending">Pending</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Completed">Completed</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="due_date" class="form-label">Due Date</label>
+      <input type="date" name="due_date" class="form-control" id="due_date" />
+    </div>
+    <div class="mb-3">
+      <label for="task_image" class="form-label">Task Image</label>
+      <input type="file" name="task_image" class="form-control" id="task_image" />
+    </div>
+    <button type="submit" class="btn btn-primary">Add New Task</button>
+  </form>
+{% endblock %}
